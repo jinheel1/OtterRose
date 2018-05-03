@@ -8,10 +8,14 @@ output:
     toc_float:  true
     code_folding:  show
 runtime: shiny
+
 ---
 
 #Draft of Interactive Project
 ===
+
+##Setup
+
 
 #Graph 1 (Jinhee Lee)
 ===
