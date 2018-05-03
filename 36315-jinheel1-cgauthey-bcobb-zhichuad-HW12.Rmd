@@ -8,14 +8,17 @@ output:
     toc_float:  true
     code_folding:  show
 runtime: shiny
-
 ---
-
+```{r}
+getwd()
+library(tidyverse)
+drugs <- read.table("drug_consumption.txt",sep = ",")
+drugs <- drugs[, -1]
+colnames(drugs) <- c("Age" , "Gender", "Education", "Country", "Ethnicity", "Nscore", "Escore", "Oscore", "Ascore", "Cscore", "Impulsive", "SS", "Alcohol", "Amphetamine", "Amyl", "Benzos", "Caffeine", "Cannabis", "Chocolate", "Cocaine", "Crack", "Ecstasy", "Heroin", "Ketamine", "Legalh", "LSD", "Meth", "Mushrooms", "Nicotine", "SEMR", "VSA")
+View(drugs)
+```
 #Draft of Interactive Project
 ===
-
-##Setup
-
 
 #Graph 1 (Jinhee Lee)
 ===
