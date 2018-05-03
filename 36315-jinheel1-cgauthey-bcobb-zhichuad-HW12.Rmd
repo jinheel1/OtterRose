@@ -12,10 +12,52 @@ runtime: shiny
 ```{r}
 getwd()
 library(tidyverse)
+library(car)
 drugs <- read.table("drug_consumption.txt",sep = ",")
 drugs <- drugs[, -1]
 colnames(drugs) <- c("Age" , "Gender", "Education", "Country", "Ethnicity", "Nscore", "Escore", "Oscore", "Ascore", "Cscore", "Impulsive", "SS", "Alcohol", "Amphetamine", "Amyl", "Benzos", "Caffeine", "Cannabis", "Chocolate", "Cocaine", "Crack", "Ecstasy", "Heroin", "Ketamine", "Legalh", "LSD", "Meth", "Mushrooms", "Nicotine", "SEMR", "VSA")
 View(drugs)
+drugs$Ethnicity[drugs$Ethnicity == -0.50212] <- "Asian"
+drugs$Ethnicity[drugs$Ethnicity == -1.10702] <- "Black"
+drugs$Ethnicity[drugs$Ethnicity == 1.90725] <- "Black/Asian"
+drugs$Ethnicity[drugs$Ethnicity == 0.12600] <- "White/Asian"
+drugs$Ethnicity[drugs$Ethnicity == -0.22166] <- "White/Black"
+drugs$Ethnicity[drugs$Ethnicity == 0.11440] <- "Other"
+drugs$Ethnicity[drugs$Ethnicity == -0.31685] <- "White"
+
+
+drugs$Education[drugs$Education == -2.43591] <- "<16"
+drugs$Education[drugs$Education == -1.73790] <- "16"
+drugs$Education[drugs$Education == -1.43719] <- "17"
+drugs$Education[drugs$Education == -1.22751] <- "18"
+drugs$Education[drugs$Education == -0.61113] <- "Uni_dropout"
+drugs$Education[drugs$Education == -0.05921] <- "Prof_degree"
+drugs$Education[drugs$Education == 0.45468] <- "Uni"
+drugs$Education[drugs$Education == 1.16365] <- "Masters"
+drugs$Education[drugs$Education == 1.98437] <- "Doc"
+
+drugs$Gender[drugs$Gender == 0.48246] <- "F"
+drugs$Gender[drugs$Gender == -0.48246] <- "M"
+
+drugs$Age[drugs$Age == -0.95197] <- "18-24"
+drugs$Age[drugs$Age == -0.07854] <- "25-34"
+drugs$Age[drugs$Age == 0.49788] <- "35-44"
+drugs$Age[drugs$Age == 1.09449] <- "45-54"
+drugs$Age[drugs$Age == 1.82213] <- "55-64"
+drugs$Age[drugs$Age == 2.59171] <- " 65+"
+
+drugs$Country[drugs$Country == -0.09765] <- "Aus"
+drugs$Country[drugs$Country == 0.24923] <- "Can"
+drugs$Country[drugs$Country == -0.46841] <- "NZ"
+drugs$Country[drugs$Country == -0.28519] <- "Other"
+drugs$Country[drugs$Country == 0.21128] <- "Irl"
+drugs$Country[drugs$Country == 0.96082] <- "UK"
+drugs$Country[drugs$Country == -0.57009] <- "USA"
+
+
+
+
+#drugs$Education <- recode(drugs$Education, "-2.43591 = '<16'", "-1.73790 = '16'", "-1.43719 = '17'", "-1.22751 = '18'", "-0.61113 = 'Uni_dropout'", "-0.05921 = 'Prof_degree'", "0.45468 = 'Uni'", "1.16365 = 'Masters'", "1.98437 = 'Doc'"    )
 ```
 #Draft of Interactive Project
 ===
@@ -41,7 +83,8 @@ View(drugs)
 ===
 
 ```{r}
-
+p <- ggplot(drugs, aes(x = Education)) + geom_bar() + facet_grid(~ Ethnicity)
+p
 ```
 
 
